@@ -2,7 +2,7 @@
 
 @section('content')
 
-
+<section class="hero hero-with-header">
 
 <div class="container pt-5">
     <h2 class="text-center pb-5">Anywhere you are, UID can help you with your identification issues!</h2>
@@ -34,6 +34,8 @@
         </div>
     </div>
 </div>
+
+</section>
 
 
 @endsection

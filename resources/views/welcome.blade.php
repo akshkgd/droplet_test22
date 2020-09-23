@@ -1,91 +1,147 @@
-@extends('layouts.app')
+<!doctype html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
-@section('content')
-<div class="container pt-2">
-    <div class="row">
-        <div class="col-sm-12">
-        <div class="flash-message">
-    @foreach (['danger', 'warning', 'success', 'info'] as $msg)
-    @if(Session::has('alert-' . $msg))
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <p class="alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
-    @endif
-    @endforeach
-        </div>
-    </div>
-</div>
-<div class="container pt-3 ">
-    <div class="row">
-        <div class="col-sm-5">
-            <!-- <div class="pt-3 ">
-                <img src="{{asset('/img/user.png')}}" alt="" class="avatar-hero"  > <span class="text-2">Get your own Unique Ientity with you!!</span> 
-            </div> -->
-            <div class="text-center pt-4">
-                <h3>Unique Identification System</h3>
-                <h4 class="text-muted">Search for a person using is identity number! New to UID??</h4>
-                <button type="button" class="btn btn-outline-primary">Get Started</button>
-                <button type="button" class="btn btn-outline-primary">Know More</button>
-            </div>
-            <div class="card mt-5">
-                <div class="card-header" style="background-color: white; padding:8px">Search Identity using Identification Numbr!</div>
-                <div class="card-body">
-                    <form method="POST" action="{{ route('search') }}">
-                        @csrf
-                        <div class="form-group row pl-3 pr-3">
-                            <input id="search_value" name="search_value" placeholder="Search for a user" type="text" class="form-control">
-                        </div>
-                        <button type="submit" class="btn btn-primary w-100">search User</button>
-                    </form>
-                    <div class="pt-4">
-                    <a href="#" class="card-link">Create your Identity</a>
-                <a href="#" class="card-link">Know More</a>
-                    </div>
-                </div>
-                
-            </div>
-        </div>
-        <div class="col-sm-7">
-            <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
-                <ol class="carousel-indicators">
-                    <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
-                    <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
-                    <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
-                </ol>
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <img src="{{asset('/img/c11.jpeg')}}" class="d-block w-100 uid-car" alt="...">
-                        <div class="carousel-caption d-none d-md-block">
-                            <h2>First slide label</h5>
-                                <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <img src="{{asset('/img/c11.jpeg')}}" class="d-block w-100 uid-car" alt="...">
-                        <div class="carousel-caption d-none d-md-block">
-                            <h2>Second slide label</h5>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <img src="{{asset('/img/c11.jpeg')}}" class="d-block w-100 uid-car" alt="...">
-                        <div class="carousel-caption d-none d-md-block">
-                            <h2>Third slide label</h5>
-                                <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
-                        </div>
-                    </div>
-                </div>
-                <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    <title>{{ config('app.name', 'Laravel') }}</title>
+
+    <!-- Scripts -->
+    <script src="{{ asset('js/vendor.js') }}"></script>
+    <script src="{{ asset('js/jk.js') }}"></script>
+
+    <!-- Fonts -->
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link href="{{ asset('css/jk.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/style.css.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/vendor.css') }}" rel="stylesheet">
+
+    <style>
+        .header {
+            border-bottom: none;
+        }
+    </style>
+
+</head>
+
+<body>
+    <!-- header -->
+    <header class="header-sticky header-light" style="border-bottom:none;">
+        <div class="containe pl-1 pr-1">
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <a class="navbar-brand" href="{{url('/')}}">
+                    <a class="navbar-logo navbar-logo-light" href="{{url('/')}}" alt="Logo"> <kbd>UID - Identification system</kbd> </a>
+                    <!-- <a class="navbar-logo navbar-logo-dark" href="{{url('/')}}" alt="Logo"> ID - Identification system </a> -->
                 </a>
-                <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
-                </a>
-            </div>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="burger"><span></span></span></button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav align-items-center mr-auto text-center  ">
+                        <li class="nav-item">
+                            <a class="nav-link a-light" href="{{url('/about')}}" role="button" style="color:white">
+                                About Us
+                            </a>
+                        </li>
+
+
+                    </ul>
+
+                    <ul class="navbar-nav align-items-center mr-0">
+                        <li class="nav-item dropdow">
+                            @guest
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('login') }}" style="color:white">{{ __('Login') }}</a>
+                        </li>
+                        @if (Route::has('register'))
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('register') }}" style="color:white">{{ __('Register') }}</a>
+                        </li>
+                        @endif
+                        @else
+                        <li class="nav-item dropdown">
+                            <a id="navbarDropdown" class="nav-linkk dropdown-toggle btn btn-outline-primary" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre style="color:white">
+                                {{ Auth::user()->name }} <span class="caret"></span>
+                            </a>
+
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                    {{ __('Logout') }}
+                                </a>
+
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    @csrf
+                                </form>
+                            </div>
+                        </li>
+                        @endguest
+                        <!-- <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="../app/profile.html">Public Profile</a>
+                  <a class="dropdown-item" href="../app/connections.html">Connections</a>
+                  <a class="dropdown-item" href="../app/groups.html">Groups</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="../app/settings.html">Settings</a>
+                  <a class="dropdown-item" href="../app/payments.html">Payments</a>
+                </div> -->
+                        </li>
+                    </ul>
+                </div>
+            </nav>
         </div>
-    </div>
-</div>
+    </header>
+<section class="p-0">
+      <div class="swiper-container swiper-container-half text-white"
+        data-top-top="transform: translateY(0px);" 
+        data-top-bottom="transform: translateY(250px);">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide vh-100">
+            <div class="image image-overlay" style="background-image:url('/img/cover.jpeg')"></div>
+            <div class="caption">
+              <div class="container">
+                <div class="row justify-content-center vh-100">
+                  <div class="col-md-8 align-self-center text-center">
+                  <form method="POST" action="{{ route('search') }}">
+              @csrf
+
+              <div class="input-group mb-3">
+
+                <input type="text" name="search_value" class="form-control shado" id="typed4" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                <div class="input-group-append">
+
+                  <!-- <button class="btn" type="submit"><a href="" class="icon-search fs-20 text-dark"></a>d </button> -->
+                  <button class="btn " type="submit"> <i class="icon-search fs-20 text-dark"></i> </button>
+                </div>
+              </div>
+            </form>
+                    <h1 data-swiper-parallax="-100%" class="displa">An <b>Unique Identity</b> that keeps you safe.</h1>
+                    <a href="{{url('register')}}" class="btn btn-white px-5">Get Started</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-footer">
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col text-center">
+                  <div class="mouse"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- / cover -->
 
 
-    @endsection
+
+
+  

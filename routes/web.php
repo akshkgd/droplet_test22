@@ -20,7 +20,7 @@ Route::get('/', function () {
 
 Route::get('/about', function () {
     return view('about');
-})->middleware('auth');
+});
 
 Auth::routes();
 
@@ -28,6 +28,9 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/add-task' , function(){
     return view('task.add');
 });
+
+
+Route::resource('docs', 'DocumentController');
 Route::get('/users', 'TestController@ShowUsers');
 Route::resource('profile', 'ProfileController');
 Route::get('/identity/{id}', 'ProfileController@myprofile')->name('showId');

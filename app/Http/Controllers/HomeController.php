@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\document;
 use Illuminate\Http\Request;
 use App\User;
 use App\Task;
@@ -31,7 +32,8 @@ class HomeController extends Controller
             return view('admin.dashboard', compact('users'));
         }
         else{
-            return view('user.dashboard');
+            $documents = document::where('user_id', Auth::user()->id)->get();
+            return view('user.dashboard', compact('documents'));
         }
     }
 }

@@ -8,6 +8,7 @@
         border-radius: 50%;
     }
 </style>
+<section class="hero hero-with-header">
 <div class="container pt-5">
     <div class="row justify-content-center">
         <div class="col-sm-8">
@@ -27,7 +28,7 @@
                     </div>
                     @endforeach
                     <div class="col-sm-6 text-right">
-                        <img src="{{$a->avatar}}" alt="" class="avatarr">
+                        <img src="{{asset('/storage/'.$a->avatar)}}" alt="" class="avatar">
 
                     </div>
                 </div>
@@ -40,12 +41,13 @@
                 <h4 class="alert alert-danger text-center mt-3" ">User Not Verified</h4>
                 @endif
                 
+                
             </div>
         </div>
     </div>
 </div>
 
-
+</section>
 
 
 @endsection
